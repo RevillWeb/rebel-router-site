@@ -5,22 +5,67 @@
     <title>Rebel Router</title>
     <link rel="stylesheet" href="assets/css/icomoon.css" />
     <link rel="stylesheet" href="style.css" />
+    <script src="bower_components/rebel-slide-menu/src/rebel-slide-menu.js" async></script>
+    <script src="bower_components/rebel-router/src/rebel-router.js" async></script>
+    <script src="app.js" async></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <!--<script async defer src="https://buttons.github.io/buttons.js"></script>-->
 </head>
 <body>
-
-    <header>
-        <nav class="main">
-            <div class="logo">
-                RBL
+<header>
+    <div class="inner">
+        <div class="container">
+            <nav class="main">
+                <a href="#" class="logo"><img src="assets/img/logo-small.png" /></a>
+                <a href="javascript:void(0)" id="menuBtn"><span class="icon icon-menu7"></span> Menu</a>
+                <!--<div class="right-menu">-->
+                <!--&lt;!&ndash; Place this tag where you want the button to render. &ndash;&gt;-->
+                <!--<a class="github-button" href="https://github.com/RevillWeb/rebel-router" data-icon="octicon-star" data-style="mega" data-count-href="/RevillWeb/rebel-router/stargazers" data-count-api="/repos/RevillWeb/rebel-router#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star RevillWeb/rebel-router on GitHub">Star</a>-->
+                <!--&lt;!&ndash; Place this tag where you want the button to render. &ndash;&gt;-->
+                <!--<a class="github-button" href="https://github.com/RevillWeb/rebel-router/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/RevillWeb/rebel-router/network" data-count-api="/repos/RevillWeb/rebel-router#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork RevillWeb/rebel-router on GitHub">Fork</a>-->
+                <!--</div>-->
+            </nav>
+            <div id="homeBanner">
+                <h1>REBEL ROUTER</h1>
+                <h2>A framework agnostic JavaScript router written for ultra-modern web applications.</h2>
+                <div class="controls">
+                    <a href="#/docs/getting-started" class="outlined-button large">GET STARTED</a>
+                </div>
             </div>
-            <a href="#"><span class="icon icon-menu7"></span> Menu</a>
-        </nav>
-    </header>
-    <main>
+        </div>
+    </div>
+    <div class="bar"></div>
+</header>
+<main class="container">
+    <rebel-slide-menu id="menu" size="small">
+        <span slot="title">DOCS</span>
+        <div slot="content">
+            <ul>
+                <li><a href="#/docs/getting-started">Getting Started</a></li>
+            </ul>
+            <ul>
+                <li class="title">Examples</li>
+                <li><a href="#">Animation</a></li>
+                <li><a href="#">Nested Routes</a></li>
+                <li><a href="#">Route Params</a></li>
+                <li><a href="#">Custom Routes</a></li>
+                <li><a href="#">PRPL Pattern</a></li>
+            </ul>
+            <ul>
+                <li class="title">Elements</li>
+                <li><a href="pages/docs.html#/elements/rebel-router">Rebel Router</a></li>
+                <li><a href="pages/docs.html#/elements/rebel-router">Rebel Route</a></li>
+                <li><a href="#">Rebel Default</a></li>
+            </ul>
+        </div>
+    </rebel-slide-menu>
+    <rebel-router id="mainRouter">
+        <rebel-default template="pages/home.html"></rebel-default>
+        <rebel-route path="/docs" template="pages/docs.html"></rebel-route>
+    </rebel-router>
+</main>
+<footer>
 
-    </main>
-    <footer>
-
-    </footer>
+</footer>
 </body>
 </html>

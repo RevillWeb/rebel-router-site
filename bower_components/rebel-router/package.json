@@ -1,0 +1,12 @@
+{
+  "name": "rebel-router",
+  "version": "0.8.2",
+  "description": "A lightweight JavaScript router written for ultra-modern applications where web components are first class citizens",
+  "license": "MIT",
+  "repository": "https://github.com/RevillWeb/rebel-router.git",
+  "main": "src/rebel-router.js",
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0"
+  }
+}

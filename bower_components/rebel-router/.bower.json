@@ -1,0 +1,35 @@
+{
+  "name": "rebel-router",
+  "description": "A lightweight JavaScript router written for ultra-modern applications where web components are first class citizens",
+  "main": "src/rebel-router.js",
+  "authors": [
+    "Leon Revill"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "web",
+    "components",
+    "JavaScript",
+    "router",
+    "es2015"
+  ],
+  "homepage": "https://github.com/RevillWeb/rebel-router",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "0.8.2",
+  "_release": "0.8.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.8.2",
+    "commit": "deb1d3c59dcc3888c2e1c0f9dbe57f4f6ae5def8"
+  },
+  "_source": "https://github.com/RevillWeb/rebel-router.git",
+  "_target": "0.8.2",
+  "_originalSource": "rebel-router",
+  "_direct": true
+}
