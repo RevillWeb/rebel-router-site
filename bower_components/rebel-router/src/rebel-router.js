@@ -11,7 +11,7 @@
 class RebelRouter extends HTMLElement {
 
     /**
-     * Main initialisation point of rebel-router
+     * Main initialisation point of rbl-router
      */
     constructor(self) {
         self = super(self);
@@ -38,16 +38,15 @@ class RebelRouter extends HTMLElement {
                 self._render();
             }
         };
-        self.addEventListener("rebel-add-route", addRoute);
+        self.addEventListener("rbl-add-route", addRoute);
         return self;
     }
 
     _getBasePath() {
-        let $element = this;
-        while ($element.parentNode) {
-            $element = $element.parentNode;
-            if ($element.nodeName.toLowerCase() == "rebel-router") {
-                const $current = $element._current();
+        const $element = RebelRouter.getParent(this, "rbl-router");
+        if ($element !== null) {
+            const $current = $element._current();
+            if ($current !== null) {
                 return $current.path;
             }
         }
@@ -62,14 +61,34 @@ class RebelRouter extends HTMLElement {
         return this._options;
     }
 
+    get params() {
+        const $current = this._current();
+        if ($current !== null) {
+            return RebelRouter.getParamsFromUrl($current.regex, $current.path);
+        }
+        return null;
+    }
+
     connectedCallback() {
         this._basePath = this._getBasePath();
         //Get options
         this._options = {
             "animation": (this.getAttribute("animation") == "true"),
             "shadowRoot": (this.getAttribute("shadow") == "true"),
-            "inherit": (this.getAttribute("inherit") != "false")
+            "inherit": (this.getAttribute("inherit") != "false"),
+            "cache": (this.getAttribute("cache") != "false")
         };
+        // if (this._options.cache !== false && 'serviceWorker' in navigator) {
+        //     navigator.serviceWorker.register("bower_components/rebel-router/src/sw.js").then(function(registration) {
+        //         // Registration was successful
+        //         console.log(registration);
+        //         console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        //     }).catch(function(err) {
+        //         // registration failed :(
+        //         console.log('ServiceWorker registration failed: ', err);
+        //     });
+        //
+        // }
         RebelRouter.pathChange((path, isBack) => {
             if (this.options.animation === true) {
                 if (isBack === true) {
@@ -171,45 +190,50 @@ class RebelRouter extends HTMLElement {
      * Method used to register a callback to be called when the URL path changes.
      * @param callback
      */
+    static _onRouteChange()  {
+        /**
+         *  event.oldURL and event.newURL would be better here but this doesn't work in IE :(
+         */
+        if (window.location.href != RebelRouter.oldURL) {
+            RebelRouter.changeCallbacks.forEach(function(callback){
+                callback(RebelRouter.getPathFromUrl(), RebelRouter.isBack);
+            });
+            RebelRouter.isBack = false;
+        }
+        RebelRouter.oldURL = window.location.href;
+    }
+
     static pathChange(callback) {
+        //Call it right away so that the callback has the latest route instantly
+        callback(RebelRouter.getPathFromUrl(), RebelRouter.isBack);
         if (RebelRouter.changeCallbacks === undefined) {
             RebelRouter.changeCallbacks = [];
         }
         RebelRouter.changeCallbacks.push(callback);
-        const changeHandler = () => {
-            /**
-             *  event.oldURL and event.newURL would be better here but this doesn't work in IE :(
-             */
-            if (window.location.href != RebelRouter.oldURL) {
-                RebelRouter.changeCallbacks.forEach(function(callback){
-                    callback(RebelRouter.getPathFromUrl(), RebelRouter.isBack);
-                });
-                RebelRouter.isBack = false;
-            }
-            RebelRouter.oldURL = window.location.href;
-        };
         if (window.onhashchange === null) {
             window.addEventListener("rblback", function(){
                 RebelRouter.isBack = true;
             });
+            window.onhashchange = RebelRouter._onRouteChange;
         }
-        window.onhashchange = changeHandler;
+        if (window.onpopstate === null) {
+            window.onpopstate = RebelRouter._onRouteChange;
+        }
     }
 
     /**
      * Static helper method used to get the parameters from the provided route.
      * @param regex
-     * @param route
-     * @param path
+     * @param routePath
      * @returns {{}}
      */
-    static getParamsFromUrl(regex, route) {
+    static getParamsFromUrl(regex, routePath) {
         const path = RebelRouter.getPathFromUrl();
         let result = RebelRouter.parseQueryString(path);
         const re = /{(\w+)}/g;
         let results = [];
         let match;
-        while (match = re.exec(route)) {
+        while (match = re.exec(routePath)) {
             results.push(match[1]);
         }
         if (regex !== null) {
@@ -226,10 +250,7 @@ class RebelRouter extends HTMLElement {
      * @returns {*}
      */
     static getPathFromUrl() {
-        var result = window.location.href.match(/#(.*)$/);
-        if (result !== null) {
-            return result[1] || "/";
-        }
+        return (!window.location.hash) ? window.location.pathname : window.location.hash.replace("#", "");
     }
 
     static importTemplate(url) {
@@ -270,12 +291,27 @@ class RebelRouter extends HTMLElement {
         return string.replace(/\${(.*)}/, "");
     }
 
+    static go(path) {
+        window.history.pushState(null, null, path);
+        RebelRouter._onRouteChange();
+    }
+
+    static getParent($element, tagName) {
+        while ($element !== document && $element.parentNode) {
+            $element = $element.parentNode;
+            if ($element.nodeName.toLowerCase() == tagName) {
+                return $element;
+            }
+        }
+        return null;
+    }
+
 }
 
-window.customElements.define("rebel-router", RebelRouter);
+window.customElements.define("rbl-router", RebelRouter);
 
 /**
- * Class which represents the rebel-route custom element
+ * Class which represents the rbl-route custom element
  */
 class RebelRoute extends HTMLElement {
     constructor() {
@@ -322,7 +358,7 @@ class RebelRoute extends HTMLElement {
                     this.style.display = "inherit";
                     resolve();
                 };
-                this.classList.add('rebel-animate');
+                this.classList.add('rbl-animate');
                 this.classList.add('enter');
                 setTimeout(() => {
                     this.classList.add('complete');
@@ -346,7 +382,7 @@ class RebelRoute extends HTMLElement {
                     this.style.display = "none";
                     resolve();
                 };
-                this.classList.add('rebel-animate');
+                this.classList.add('rbl-animate');
                 this.classList.add('exit');
                 setTimeout(() => {
                     this.classList.add('complete');
@@ -398,11 +434,11 @@ class RebelRoute extends HTMLElement {
                     "$element": this
                 }, defaults);
                 if (detail.path === null) {
-                    throw Error("rebel-route requires a path attribute to be specified.")
+                    throw Error("rbl-route requires a path attribute to be specified.")
                 }
                 this._path = detail.path;
                 this._regex = detail.regex;
-                this.dispatchEvent(new CustomEvent("rebel-add-route", {
+                this.dispatchEvent(new CustomEvent("rbl-add-route", {
                     "detail": detail,
                     "bubbles": true
                 }));
@@ -415,17 +451,17 @@ class RebelRoute extends HTMLElement {
         return RebelRouter.interpolateString(string, RebelRouter.getParamsFromUrl(this._regex, this._path));
     }
 }
-window.customElements.define("rebel-route", RebelRoute);
+window.customElements.define("rbl-route", RebelRoute);
 
 /**
- * Class which represents the rebel-default custom element
+ * Class which represents the rbl-default custom element
  */
 class RebelDefault extends RebelRoute {
     connectedCallback() {
         super.connectedCallback({"path": "*"});
     }
 }
-window.customElements.define("rebel-default", RebelDefault);
+window.customElements.define("rbl-default", RebelDefault);
 
 /**
  * Represents the prototype for an anchor element which added functionality to perform a back transition.
@@ -443,8 +479,45 @@ class RebelBackA extends HTMLAnchorElement {
     }
 }
 /**
+ * Represents the prototype for an anchor element which ensures history API support instead of hash.
+ */
+class RebelLink extends HTMLElement {
+    constructor(self) {
+        self = super(self);
+        self.addEventListener("click", (event) => {
+            const path = this.getAttribute("href");
+            event.preventDefault();
+            RebelRouter.go(path);
+        });
+        return self;
+    }
+}
+window.customElements.define("rbl-link", RebelLink, {extends: "a"});
+
+
+/**
+ * Represents the prototype for an anchor element which ensures history API support instead of hash.
+ */
+class RebelParams extends HTMLElement {
+    constructor(self) {
+        self = super(self);
+        self._name = null;
+        self._$router = null;
+        return self;
+    }
+    connectedCallback() {
+        this._$template = this.innerHTML;
+        this._$router = RebelRouter.getParent(this, "rbl-router");
+        if (this._$router !== null) {
+            RebelRouter.pathChange(() => {
+                if (this._$router !== null) {
+                    this.innerText = RebelRouter.interpolateString(this._$template, this._$router.params);
+                }
+            });
+        }
+    }
+}
+/**
  * Register the back button custom element
  */
-window.customElements.define("rebel-back-a", RebelBackA, {
-    extends: "a"
-});
+window.customElements.define("rbl-params", RebelParams);

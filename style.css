@@ -113,34 +113,34 @@ footer {
     min-height: 250px;
 }
 
-rebel-slide-menu {
+rbl-slide-menu {
     --header-bg-color: #910002;
 }
 
-rebel-slide-menu ul {
+rbl-slide-menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
     border-bottom: solid 1px rgba(204, 204, 204, 0.25);
 }
-rebel-slide-menu ul li {
+rbl-slide-menu ul li {
     line-height: 40px;
 }
-rebel-slide-menu ul li a {
+rbl-slide-menu ul li a {
     padding: 0 20px;
     color: #333;
     text-decoration: none;
     display: block;
     transition: color 300ms ease;
 }
-rebel-slide-menu ul li.title {
+rbl-slide-menu ul li.title {
     padding: 0 10px;
     font-weight: bold;
 }
-rebel-slide-menu ul li a:visited {
+rbl-slide-menu ul li a:visited {
     color: inherit;
 }
-rebel-slide-menu ul li a:hover {
+rbl-slide-menu ul li a:hover {
     color: #910002;
     background-color: #E1E1E1;
 }
