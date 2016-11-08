@@ -29,6 +29,7 @@ header .inner {
 }
 #homeBanner {
     margin: 20px 0;
+    display: none;
 }
 #homeBanner h1 {
     color: #FFF;

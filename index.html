@@ -16,7 +16,7 @@
     <div class="inner">
         <div class="container">
             <nav class="main">
-                <a href="/" class="logo"><img src="assets/img/logo-small.png" /></a>
+                <a href="/" is="rbl-link" class="logo"><img src="assets/img/logo-small.png" /></a>
                 <a href="javascript:void(0)" id="menuBtn"><span class="icon icon-menu7"></span> Menu</a>
                 <!--<div class="right-menu">-->
                 <!--&lt;!&ndash; Place this tag where you want the button to render. &ndash;&gt;-->
@@ -45,8 +45,8 @@
             </ul>
             <ul>
                 <li class="title">Examples</li>
-                <li><a href="/#/docs/examples/animation">Animation</a></li>
-                <li><a href="/#/docs/examples/nested-routes">Nested Routes</a></li>
+                <li><a href="#/docs/examples/animation">Animation</a></li>
+                <li><a href="#/docs/examples/nested-routes">Nested Routes</a></li>
                 <li><a href="#">Route Params</a></li>
                 <li><a href="#">Custom Routes</a></li>
                 <li><a href="#">PRPL Pattern</a></li>
@@ -59,15 +59,23 @@
             </ul>
         </div>
     </rbl-slide-menu>
-    <rbl-router id="mainRouter">
+    <rbl-router id="mainRouter" pre-cache pre-cache-extra="assets/img/tube-map-bg.png">
         <rbl-default template="pages/home.html"></rbl-default>
-        <rbl-route path="/docs" template="pages/docs.html"></rbl-route>
-        <rbl-route path="/test/{animal}/{size}">
+        <rbl-route path="/docs" template="/pages/docs.html"></rbl-route>
+        <rbl-route path="/test/{animal}/{size}" pre-cache="all">
             <template>
                 <h1>Animal Page</h1>
+                <img src="assets/img/cat.jpg" />
+                <link rel="stylesheet" href="style.css">
+                <script src="app.js"></script>
                 <rbl-params>Animal: ${animal} Size: ${size}</rbl-params>
             </template>
         </rbl-route>
+        <rbl-offline>
+            <template>
+                <p>Oh No! You have no internet connect.</p>
+            </template>
+        </rbl-offline>
     </rbl-router>
 </main>
 <footer>
