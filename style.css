@@ -4,6 +4,9 @@ html, body {
     margin: 0;
     padding: 0;
 }
+p {
+    font-weight: 300;
+}
 .container {
     width: 75%;
     margin: auto;
@@ -28,14 +31,17 @@ header .inner {
     color: #E1E1E1;
 }
 #homeBanner {
-    margin: 20px 0;
+    margin: 40px 0;
     display: none;
+    text-align: center;
 }
 #homeBanner h1 {
     color: #FFF;
     font-weight: 400;
-    font-size: 50px;
+    font-size: 80px;
+    line-height: 80px;
     margin: 0;
+    font-family: 'Bungee Inline', cursive;
 }
 #homeBanner h2 {
     font-weight: 300;
@@ -144,4 +150,45 @@ rbl-slide-menu ul li a:visited {
 rbl-slide-menu ul li a:hover {
     color: #910002;
     background-color: #E1E1E1;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.flex-item {
+    flex: 1;
+    padding: 10px;
+    min-width: 300px;
+}
+
+.page-title {
+    border-bottom: dotted 1px #910002;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.features .flex-item {
+    display: flex;
+}
+.features .flex-item .text {
+    padding-left: 20px;
+}
+.features .flex-item .bar {
+    width: 2px;
+    background-color: #CCC;
+}
+.features .flex-item .text h3 {
+    margin: 0;
+    font-weight: 400;
+    color: #910002;
+}
+.features .flex-item .feature-icon {
+    font-size: 64px;
+    text-align: center;
+    width: 100px;
+    flex-shrink: 0;
+    color: #999;
 }
