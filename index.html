@@ -27,7 +27,7 @@
                 <h1>REBEL ROUTER</h1>
                 <h2>A framework agnostic JavaScript router written for ultra-modern web applications.</h2>
                 <div class="controls">
-                    <a href="/docs/getting-started" class="outlined-button large" is="rbl-link">GET STARTED</a>
+                    <a href="docs/getting-started" class="outlined-button large" is="rbl-link">GET STARTED</a>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
         <span slot="title">DOCS</span>
         <div slot="content">
             <ul>
-                <li><a href="/docs/getting-started" is="rbl-link">Getting Started</a></li>
+                <li><a href="docs/getting-started" is="rbl-link">Getting Started</a></li>
             </ul>
             <ul>
                 <li class="title">Examples</li>
@@ -59,8 +59,8 @@
     </rbl-slide-menu>
     <rbl-router id="mainRouter" cache pre-cache-extra="assets/img/tube-map-bg.png" offline-fallback="offline/default.html">
         <rbl-default pre-cache="false" template="pages/home.html"></rbl-default>
-        <rbl-route pre-cache="false" path="/docs" template="/pages/docs.html"></rbl-route>
-        <rbl-route path="/test/{animal}/{size}" pre-cache="false">
+        <rbl-route pre-cache="false" path="/docs" template="pages/docs.html"></rbl-route>
+        <rbl-route path="test/{animal}/{size}" pre-cache="false">
             <template>
                 <h1>Animal Page</h1>
                 <img src="assets/img/cat.jpg" />
