@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ad98dd3-6cf1-4198-bd32-552ea91c7ba3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sub/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sub/page1.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/rebel-router/src/rebel-router.js" afterPath="$PROJECT_DIR$/bower_components/rebel-router/src/rebel-router.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/offline/default.html" afterPath="$PROJECT_DIR$/offline/default.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rebel-sw.js" afterPath="$PROJECT_DIR$/rebel-sw.js" />
     </list>
     <ignored path="rebel-router-site.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,14 +27,14 @@
     <favorites_list name="rebel-router-site" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6185142">
+    <splitter split-orientation="horizontal" split-proportion="0.5064858">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="rebel-router.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/bower_components/rebel-router/src/rebel-router.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+                <state relative-caret-position="216">
+                  <caret line="205" column="70" selection-start-line="205" selection-start-column="70" selection-end-line="205" selection-end-column="70" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -63,21 +62,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="238">
-                  <caret line="59" column="78" selection-start-line="59" selection-start-column="78" selection-end-line="59" selection-end-column="78" />
+                <state relative-caret-position="306">
+                  <caret line="60" column="39" selection-start-line="60" selection-start-column="39" selection-end-line="60" selection-end-column="39" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="default.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="default.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/offline/default.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state relative-caret-position="17">
+                  <caret line="1" column="62" selection-start-line="1" selection-start-column="62" selection-end-line="1" selection-end-column="62" />
                   <folding />
                 </state>
               </provider>
@@ -90,8 +89,8 @@
           <file leaf-file-name="rebel-sw.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/rebel-sw.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
+                <state relative-caret-position="312">
+                  <caret line="61" column="48" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
                   <folding />
                 </state>
               </provider>
@@ -126,12 +125,12 @@
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/pages/home.html" />
         <option value="$PROJECT_DIR$/style.css" />
-        <option value="$PROJECT_DIR$/offline/default.html" />
-        <option value="$PROJECT_DIR$/rebel-sw.js" />
-        <option value="$PROJECT_DIR$/bower_components/rebel-router/src/rebel-router.js" />
         <option value="$PROJECT_DIR$/sub/page1.html" />
         <option value="$PROJECT_DIR$/sub/index.html" />
+        <option value="$PROJECT_DIR$/bower_components/rebel-router/src/rebel-router.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/rebel-sw.js" />
+        <option value="$PROJECT_DIR$/offline/default.html" />
       </list>
     </option>
   </component>
@@ -201,6 +200,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="sub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rebel-router-site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rebel-router-site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="offline" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -313,12 +326,12 @@
       <workItem from="1478344565199" duration="19339000" />
       <workItem from="1478627917858" duration="17475000" />
       <workItem from="1478800074716" duration="9164000" />
-      <workItem from="1479234549357" duration="4571000" />
+      <workItem from="1479234549357" duration="6817000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81366000" />
+    <option name="totallyTimeSpent" value="83612000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -684,22 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/offline/default.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rebel-sw.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sub/page1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -718,8 +715,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bower_components/rebel-router/src/rebel-router.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+        <state relative-caret-position="216">
+          <caret line="205" column="70" selection-start-line="205" selection-start-column="70" selection-end-line="205" selection-end-column="70" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -728,8 +725,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="59" column="78" selection-start-line="59" selection-start-column="78" selection-end-line="59" selection-end-column="78" />
+        <state relative-caret-position="306">
+          <caret line="60" column="39" selection-start-line="60" selection-start-column="39" selection-end-line="60" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/offline/default.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="62" selection-start-line="1" selection-start-column="62" selection-end-line="1" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rebel-sw.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="61" column="48" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
           <folding />
         </state>
       </provider>

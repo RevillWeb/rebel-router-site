@@ -45,19 +45,27 @@ self.addEventListener("message", function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+    // console.log("FETCH EVENT:", event.request);
     const response = new Promise((resolve, reject) => {
         caches.match(event.request).then(function(cachedResponse) {
-            console.log("MATCHED:", cachedResponse);
+            //console.log("MATCHED:", cachedResponse);
             if (cachedResponse !== undefined) {
-                console.log("CACHE");
+                //console.log("CACHE");
                 resolve(cachedResponse)
             } else {
                 fetch(event.request).then(function(response){
-                    console.log("FETCHED:", response);
+                    //console.log("FETCHED:", response.url);
                     resolve(response);
                 }).catch(function(){
-                    console.log("COULD NOT FETCH");
-
+                    console.log("COULD NOT FETCH:", event.request);
+                    if (event.request.url == "http://localhost:8081/pages/home.html") {
+                        console.log("FALLBACK");
+                        const fallback = caches.match('rbl-fallback');
+                        resolve(fallback);
+                    }
+                    //console.log("FALLBACK:", fallback);
+                    //resolve(fallback);
+                    reject();
                 });
             }
         }).catch(function(error){
