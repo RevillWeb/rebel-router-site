@@ -24,7 +24,8 @@ class RebelRouter extends HTMLElement {
         self._id = null;
         self._swInstance = null;
         self._cache = false;
-        self._cachedUrls = [];
+        self._cachedUrls = ["/"];
+        self._offlineFallback = null;
         //Options
         self._animation = false;
         self._inherit = false;
@@ -116,10 +117,11 @@ class RebelRouter extends HTMLElement {
         if (cacheVersion !== null) {
             this.cacheVersion = cacheVersion;
         }
-        const createCache = (this.getAttribute("pre-cache") !== null);
+        const createCache = (this.getAttribute("cache") !== null);
         if (createCache !== false) {
             this._createCache();
         }
+        this._offlineFallback = this.getAttribute("offline-fallback");
         //this.addToCache([this._cache.swPath]);
         RebelRouter.pathChange((path, isBack) => {
             if (this._animation === true) {
@@ -209,9 +211,9 @@ class RebelRouter extends HTMLElement {
                 if (urls.length > 0) {
                     this.cacheUrls(urls);
                 }
+            } else {
+                this._updateCache();
             }
-            //Always call update because routes and external activities might have set some URLS to be cached
-            this._updateCache();
         }).catch((error) => {
             this.cache = false;
             console.error("Service Worker registration failed:", error);
@@ -239,7 +241,8 @@ class RebelRouter extends HTMLElement {
                 "id": this._id,
                 "version": this._cacheVersion,
                 "action": "add-cache",
-                "urls": this._cachedUrls
+                "urls": this._cachedUrls,
+                "offlineFallback": this._offlineFallback
             });
         }
     }
@@ -431,6 +434,7 @@ class RebelRoute extends HTMLElement {
         self._regex = null;
         self._preLoad = null;
         self._preCache = null;
+        self._preLoad = null;
         self._tplInline = null;
         self._tplResource = null;
         self._$router = null;
@@ -478,6 +482,7 @@ class RebelRoute extends HTMLElement {
             };
 
             this._preCache = this.getAttribute("pre-cache");
+            this._preLoad = this.getAttribute("pre-load");
             //We only need to know about the parent router if we want to do some caching
             if (this._preCache != "false") {
                 this._$router = RebelRouter.getParent(this, "rbl-router");
@@ -505,23 +510,24 @@ class RebelRoute extends HTMLElement {
                     this._$router.cacheUrls(urls);
                 }
 
-                this._load().then(() => {
-                    //If pre-cache all was set, let's grab cacheable assets from the template and cache those
-                    if (this._preCache == "all") {
-                        const urls = RebelRouter.getCacheableItems(this._$template);
-                        if (urls.length > 0) {
-                            if (this._$router !== null && this._$router.cache === true) {
+            } else {
+
+                if (this._preLoad != "false") {
+                    this._load().then(() => {
+                        //If pre-cache all was set, let's grab cacheable assets from the template and cache those
+                        if (this._preCache == "all" && this._$router !== null && this._$router.cache === true) {
+                            const urls = RebelRouter.getCacheableItems(this._$template);
+                            if (urls.length > 0) {
                                 this._$router.cacheUrls(urls);
                             }
                         }
-                    }
+                        _success();
+                    }).catch((error) => {
+                        console.error(error);
+                    });
+                } else {
                     _success();
-                }).catch((error) => {
-                    console.error(error);
-                });
-
-            } else {
-                _success();
+                }
             }
 
         }
@@ -630,16 +636,6 @@ class RebelDefault extends RebelRoute {
     }
 }
 window.customElements.define("rbl-default", RebelDefault);
-
-/**
- * Class which represents the rbl-default custom element
- */
-class RebelOffline extends HTMLElement {
-    connectedCallback() {
-        this._$router = RebelRouter.getParent(this, "rbl-router");
-    }
-}
-window.customElements.define("rbl-offline", RebelOffline);
 
 /**
  * Represents the prototype for an anchor element which added functionality to perform a back transition.

@@ -42,6 +42,7 @@ header .inner {
     line-height: 80px;
     margin: 0;
     font-family: 'Bungee Inline', cursive;
+    text-shadow: 1px 1px 2px #333;
 }
 #homeBanner h2 {
     font-weight: 300;
@@ -165,9 +166,9 @@ rbl-slide-menu ul li a:hover {
 }
 
 .page-title {
-    border-bottom: dotted 1px #910002;
     text-align: center;
     margin-bottom: 20px;
+    color: #910002;
 }
 
 .features .flex-item {
@@ -175,6 +176,7 @@ rbl-slide-menu ul li a:hover {
 }
 .features .flex-item .text {
     padding-left: 20px;
+    font-size: 18px;
 }
 .features .flex-item .bar {
     width: 2px;
@@ -191,4 +193,27 @@ rbl-slide-menu ul li a:hover {
     width: 100px;
     flex-shrink: 0;
     color: #999;
+}
+.page-separator {
+    height: 5px;
+    background-color: rgba(145, 0, 2, 0.3);
+    position: relative;
+    width: 50%;
+    margin: 20px auto 40px auto;
+}
+.page-separator .circle {
+    width: 10px;
+    height: 10px;
+    border: solid 5px rgba(145, 0, 2, 0.56);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: -7px;
+    background-color: #FFFFFF;
+}
+.page-separator .circle:first-child {
+    left: 0;
+}
+.page-separator .circle:last-child {
+    right: 0;
 }

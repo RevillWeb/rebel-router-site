@@ -9,8 +9,7 @@
     <script src="https://unpkg.com/skatejs-web-components/dist/index-with-deps.min.js"></script>
     <script src="bower_components/rebel-slide-menu/src/rebel-slide-menu.js" async></script>
     <script src="bower_components/rebel-router/src/rebel-router.js"></script>
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <!--<script async defer src="https://buttons.github.io/buttons.js"></script>-->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body>
 <header>
@@ -19,12 +18,10 @@
             <nav class="main">
                 <a href="/" is="rbl-link" class="logo"><img src="assets/img/logo-small.png" /></a>
                 <a href="javascript:void(0)" id="menuBtn"><span class="icon icon-menu7"></span> Menu</a>
-                <!--<div class="right-menu">-->
-                <!--&lt;!&ndash; Place this tag where you want the button to render. &ndash;&gt;-->
-                <!--<a class="github-button" href="https://github.com/RevillWeb/rbl-router" data-icon="octicon-star" data-style="mega" data-count-href="/RevillWeb/rbl-router/stargazers" data-count-api="/repos/RevillWeb/rbl-router#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star RevillWeb/rbl-router on GitHub">Star</a>-->
-                <!--&lt;!&ndash; Place this tag where you want the button to render. &ndash;&gt;-->
-                <!--<a class="github-button" href="https://github.com/RevillWeb/rbl-router/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/RevillWeb/rbl-router/network" data-count-api="/repos/RevillWeb/rbl-router#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork RevillWeb/rbl-router on GitHub">Fork</a>-->
-                <!--</div>-->
+                <div class="right-menu">
+                    <a class="github-button" href="https://github.com/RevillWeb/rbl-router" data-icon="octicon-star" data-style="mega" data-count-href="/RevillWeb/rbl-router/stargazers" data-count-api="/repos/RevillWeb/rbl-router#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star RevillWeb/rbl-router on GitHub">Star</a>
+                    <a class="github-button" href="https://github.com/RevillWeb/rbl-router/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/RevillWeb/rbl-router/network" data-count-api="/repos/RevillWeb/rbl-router#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork RevillWeb/rbl-router on GitHub">Fork</a>
+                </div>
             </nav>
             <div id="homeBanner">
                 <h1>REBEL ROUTER</h1>
@@ -60,10 +57,10 @@
             </ul>
         </div>
     </rbl-slide-menu>
-    <rbl-router id="mainRouter" pre-cache pre-cache-extra="assets/img/tube-map-bg.png">
-        <rbl-default template="pages/home.html"></rbl-default>
-        <rbl-route path="/docs" template="/pages/docs.html"></rbl-route>
-        <rbl-route path="/test/{animal}/{size}" pre-cache="all">
+    <rbl-router id="mainRouter" cache pre-cache-extra="assets/img/tube-map-bg.png" offline-fallback="offline/default.html">
+        <rbl-default pre-cache="false" template="pages/home.html"></rbl-default>
+        <rbl-route pre-cache="false" path="/docs" template="/pages/docs.html"></rbl-route>
+        <rbl-route path="/test/{animal}/{size}" pre-cache="false">
             <template>
                 <h1>Animal Page</h1>
                 <img src="assets/img/cat.jpg" />
@@ -72,11 +69,6 @@
                 <rbl-params>Animal: ${animal} Size: ${size}</rbl-params>
             </template>
         </rbl-route>
-        <rbl-offline>
-            <template>
-                <p>Oh No! You have no internet connect.</p>
-            </template>
-        </rbl-offline>
     </rbl-router>
 </main>
 <footer>
