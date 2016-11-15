@@ -57,7 +57,7 @@
             </ul>
         </div>
     </rbl-slide-menu>
-    <rbl-router id="mainRouter" cache pre-cache-extra="assets/img/tube-map-bg.png" offline-fallback="offline/default.html">
+    <rbl-router id="mainRouter" cache sw-path="/rebel-router-site/rebel-sw.js" pre-cache-extra="assets/img/tube-map-bg.png" offline-fallback="offline/default.html">
         <rbl-default pre-cache="false" template="pages/home.html"></rbl-default>
         <rbl-route pre-cache="false" path="/docs" template="pages/docs.html"></rbl-route>
         <rbl-route path="test/{animal}/{size}" pre-cache="false">

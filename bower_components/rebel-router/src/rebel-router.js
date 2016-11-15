@@ -93,6 +93,7 @@ class RebelRouter extends HTMLElement {
     }
 
     _getBasePath() {
+        const bp = this.getAttribute("base-path");
         const $element = RebelRouter.getParent(this, "rbl-router");
         if ($element !== null) {
             const $current = $element._current();
@@ -100,7 +101,7 @@ class RebelRouter extends HTMLElement {
                 return $current.path;
             }
         }
-        return null;
+        return bp;
     }
 
     connectedCallback() {
@@ -509,9 +510,9 @@ class RebelRoute extends HTMLElement {
                     }
                     this._$router.cacheUrls(urls);
                 }
+                _success();
 
             } else {
-
                 if (this._preLoad != "false") {
                     this._load().then(() => {
                         //If pre-cache all was set, let's grab cacheable assets from the template and cache those

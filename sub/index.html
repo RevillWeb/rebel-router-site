@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rebel Router</title>
+    <script src="https://unpkg.com/skatejs-web-components/dist/index-with-deps.min.js"></script>
+    <script src="../bower_components/rebel-router/src/rebel-router.js"></script>
+</head>
+<body>
+
+    <rbl-router id="mainRouter">
+        <rbl-default>
+            <template>
+                <p>Default</p>
+            </template>
+        </rbl-default>
+        <rbl-route path="/page1" template="page1.html"></rbl-route>
+        <rbl-route path="/page2">
+            <template>
+                <p>Page 2</p>
+            </template>
+        </rbl-route>
+    </rbl-router>
+
+</body>
+</html>
