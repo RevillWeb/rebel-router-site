@@ -11,26 +11,93 @@
 class RebelRouter extends HTMLElement {
 
     /**
-     * Main initialisation point of rbl-router
+     * Main initialisation point of RebelRouter
      */
     constructor(self) {
         self = super(self);
+        /**
+         * Local variable which holds the previous route
+         * @type {null}
+         * @private
+         */
         self._previousRoute = null;
+        /**
+         * Local variable which holds the base path, used when router is nested
+         * @type {null}
+         * @private
+         */
         self._basePath = null;
+        /**
+         * Local variable which holds all the routes
+         * @type {{}}
+         * @private
+         */
         self._routes = {};
+        /**
+         * Local variable flag which identifies if the router has been through initialisation
+         * @type {boolean}
+         * @private
+         */
         self._initialised = false;
-        //Used to determine if we are half way through a render / transition
+        /**
+         * Local variable flag used to determine if we are half way through a render / transition
+         * @type {boolean}
+         * @private
+         */
         self._renderLock = false;
+        /**
+         * Local variable used to hold the router ID (Required for caching)
+         * @type {null}
+         * @private
+         */
         self._id = null;
+        /**
+         * Local variable used to hold the service worker instance if caching is enabled
+         * @type {null}
+         * @private
+         */
         self._swInstance = null;
+        /**
+         * Local variable flag which states if caching is enabled
+         * @type {boolean}
+         * @private
+         */
         self._cache = false;
+        /**
+         * Local variable which holds an array of caches URLs
+         * @type {[*]}
+         * @private
+         */
         self._cachedUrls = ["/"];
-        self._offlineFallback = null;
         //Options
+        /**
+         * Local variable flag which states if animation has been enabled
+         * @type {boolean}
+         * @private
+         */
         self._animation = false;
+        /**
+         * Local variable flag used to state if this router instance should inherit from any parent router instances
+         * @type {boolean}
+         * @private
+         */
         self._inherit = false;
+        /**
+         * Local variable which holds the path to the service worker file
+         * @type {string}
+         * @private
+         */
         self._swPath = "/rebel-sw.js";
+        /**
+         * Local variable which holds the current cache version number
+         * @type {number}
+         * @private
+         */
         self._cacheVersion = 1;
+        /**
+         * Method which registers a new route to the router instance
+         * @param event
+         */
         const addRoute = (event) => {
             //Prevent the route event from bubbling up any further
             event.stopImmediatePropagation();
@@ -38,7 +105,7 @@ class RebelRouter extends HTMLElement {
             self._routes[route.path] = route.$element;
             let render = true;
             for (let i = 0; i < self.children.length; i++) {
-                var $child = self.children[i];
+                const $child = self.children[i];
                 if ($child.initialised === false) {
                     render = false;
                 }
@@ -51,14 +118,36 @@ class RebelRouter extends HTMLElement {
         return self;
     }
 
+    /**
+     * Animation option property setter
+     * @param {boolean} value
+     */
     set animation(value) {
         if (this._animation === value) return;
         this._animation = (value === true);
     }
+
+    /**
+     * Animation option property getter
+     * @returns {boolean}
+     */
+    get animation() {
+        return this._animation;
+    }
+
+    /**
+     * Inherit option property setter
+     * @param value
+     */
     set inherit(value) {
         if (this._inherit === value) return;
         this._inherit = (value === true);
     }
+
+    /**
+     * Cache option property setter
+     * @param value
+     */
     set cache(value) {
         if (this._cache === value) return;
         this._cache = (value === true);
@@ -122,8 +211,6 @@ class RebelRouter extends HTMLElement {
         if (createCache !== false) {
             this._createCache();
         }
-        this._offlineFallback = this.getAttribute("offline-fallback");
-        //this.addToCache([this._cache.swPath]);
         RebelRouter.pathChange((path, isBack) => {
             if (this._animation === true) {
                 if (isBack === true) {
@@ -242,8 +329,7 @@ class RebelRouter extends HTMLElement {
                 "id": this._id,
                 "version": this._cacheVersion,
                 "action": "add-cache",
-                "urls": this._cachedUrls,
-                "offlineFallback": this._offlineFallback
+                "urls": this._cachedUrls
             });
         }
     }
@@ -577,7 +663,7 @@ class RebelRoute extends HTMLElement {
     in(animate) {
         return new Promise((resolve, reject) => {
             if (animate === true) {
-                var fb = this._setTransitionFallback(reject);
+                const fb = this._setTransitionFallback(reject);
                 const onTransitionEnd = () => {
                     clearTimeout(fb);
                     this.removeEventListener('transitionend', onTransitionEnd);
@@ -601,7 +687,7 @@ class RebelRoute extends HTMLElement {
     out(animate) {
         return new Promise((resolve, reject) => {
             if (animate === true) {
-                var fb = this._setTransitionFallback(reject);
+                const fb = this._setTransitionFallback(reject);
                 const onTransitionEnd = () => {
                     clearTimeout(fb);
                     this.removeEventListener('transitionend', onTransitionEnd);
